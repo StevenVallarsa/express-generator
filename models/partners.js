@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const partnersSchema = new Schema(
+const partnerSchema = new Schema(
   {
     name: {
       type: String,
@@ -14,7 +14,6 @@ const partnersSchema = new Schema(
     },
     featured: {
       type: Boolean,
-      require: true,
     },
     description: {
       type: String,
@@ -26,5 +25,5 @@ const partnersSchema = new Schema(
   }
 );
 
-const Partners = mongoose.model("Partners", partnersSchema);
-module.exports = Partners;
+const Partner = mongoose.model("Partner", partnerSchema);
+module.exports = Partner;
