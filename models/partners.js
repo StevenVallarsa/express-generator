@@ -25,5 +25,10 @@ const partnerSchema = new Schema(
   }
 );
 
-const Partner = mongoose.model("Partner", partnerSchema);
-module.exports = Partner;
+// TWO LINE METHOD ACCOMPLISHED IN ONE LINE BELOW
+//   BY CUTTING OUT THE MIDDLE MAN!
+
+// const Partner = mongoose.model("Partner", partnerSchema);
+// module.exports = Partner;
+
+module.exports = mongoose.model("Partner", partnerSchema);
