@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/node,bower,osx,linux,windows,dropbox,sass,less,grunt,sublimetext,code
 
+# session cookies folder
+sessions
+
 ### Node ###
 # Logs
 logs
