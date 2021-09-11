@@ -35,4 +35,15 @@ exports.jwtPassport = passport.use(
     });
   })
 );
+
 exports.verifyUser = passport.authenticate("jwt", { session: false });
+
+exports.verifyAdmin = function () {
+  if (req.user.admin === true) {
+    return next();
+  } else {
+    const err = new Error("You are not authorized to perform this operation!");
+    err.status = 403;
+    return next(err);
+  }
+};
