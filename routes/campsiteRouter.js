@@ -206,7 +206,7 @@ campsiteRouter
     Campsite.findById(req.params.campsiteId)
       .then(campsite => {
         if (campsite && campsite.comments.id(req.params.commentId)) {
-          if (campsite.comments.id(req.params.commentId).author._id.equals(req.user._id)) {
+          if (campsite.comments.id(req.params.commentId).author._id.equals(req.user._id) || req.user.admin) {
             if (req.body.rating) {
               campsite.comments.id(req.params.commentId).rating = req.body.rating;
             }
@@ -243,7 +243,7 @@ campsiteRouter
     Campsite.findById(req.params.campsiteId)
       .then(campsite => {
         if (campsite && campsite.comments.id(req.params.commentId)) {
-          if (campsite.comments.id(req.params.commentId).author._id.equals(req.user._id)) {
+          if (campsite.comments.id(req.params.commentId).author._id.equals(req.user._id) || req.user.admin) {
             campsite.comments.id(req.params.commentId).remove();
             campsite
               .save()
@@ -254,7 +254,7 @@ campsiteRouter
               })
               .catch(err => next(err));
           } else {
-            const err = new Error("You're not authorized to edit this comment!");
+            err = new Error("You're not authorized to edit a comment that isn't yours!");
             err.status = 403;
             return next(err);
           }
