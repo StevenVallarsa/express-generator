@@ -1,6 +1,10 @@
 
 # Created by https://www.gitignore.io/api/node,bower,osx,linux,windows,dropbox,sass,less,grunt,sublimetext,code
 
+# SSL sertificates
+server.cert
+server.key
+
 # session cookies folder
 sessions
 
