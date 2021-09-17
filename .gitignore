@@ -5,6 +5,9 @@
 server.cert
 server.key
 
+# Config file with Facebook info
+config.js
+
 # session cookies folder
 sessions
 
