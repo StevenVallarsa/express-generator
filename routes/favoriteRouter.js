@@ -107,29 +107,21 @@ favoriteRouter
   })
 
   .delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    Favorite.findOne({ user: req.user._id }).then(favorite => {
-      if (!favorite.campsites.includes(req.params.campsiteId)) {
-        res.statusCode = 403;
-        res.end(`You don't have campground ${req.params.campsiteId} in your favorites`);
-      } else {
-        const newFavorites = favorite.campsites.filter(f => f.toString() !== req.params.campsiteId);
-        favorite.campsites = newFavorites;
-        favorite.save();
-        // favorite.campsites.slice(req.params.campsiteId);
-        // console.log(favorite.campsites);
-        // favorite.save();
-        res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json");
-        res.json(favorite);
-      }
-    });
+    Favorite.findOne({ user: req.user._id })
+      .then(favorite => {
+        if (!favorite.campsites.includes(req.params.campsiteId)) {
+          res.statusCode = 403;
+          res.end(`You don't have campground ${req.params.campsiteId} in your favorites`);
+        } else {
+          const newFavorites = favorite.campsites.filter(f => f.toString() !== req.params.campsiteId);
+          favorite.campsites = newFavorites;
+          favorite.save();
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.json(favorite);
+        }
+      })
+      .catch(err => next(err));
   });
 
-// console.log(req.user);
-// {"username": "steve", "password": "abc123"}
-
 module.exports = favoriteRouter;
-
-// 614608533384e2d1ed869f74
-// 614608533384e2d1ed869f75
-// 614608533384e2d1ed869f76
